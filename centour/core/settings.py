@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'party'
+    'page'
 ]
 
 MIDDLEWARE = [
@@ -126,4 +126,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Custom Settings
 
-AUTH_USER_MODEL = "party.CustomUser"
+AUTH_USER_MODEL = "page.CustomUser"
