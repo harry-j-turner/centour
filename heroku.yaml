@@ -3,6 +3,6 @@ setup:
     - plan: heroku-postgresql
 build:
   docker:
-    web: Dockerfile
+    web: centour/Dockerfile
 run:
   web: gunicorn core.wsgi:application --bind 0.0.0.0:$PORT
