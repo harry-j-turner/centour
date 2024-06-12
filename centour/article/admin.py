@@ -1,13 +1,14 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-from .models import CustomUser, Page
+from .models import CustomUser, Article
 
 
 @admin.register(CustomUser)
 class UserAdmin(UserAdmin):
     pass
 
-@admin.register(Page)
-class PageAdmin(admin.ModelAdmin):
+
+@admin.register(Article)
+class ArticleAdmin(admin.ModelAdmin):
     readonly_fields = ("uuid",)

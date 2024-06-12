@@ -51,11 +51,8 @@ module.exports = {
                 "dancing-script": ["Dancing Script", "cursive"],
             },
             colors: {
-                "custom-powder-light": "#eee2dc",
-                "custom-powder": "#edc7b7",
-                "custom-blue": "#123c69",
-                "custom-blue-light": "#3a6aa4",
-                "custom-red": "#ac3b61",
+                "custom-lavender": "#FCEFEF",
+                "custom-tiffany": '#7FD8BE'
             },
         },
     },

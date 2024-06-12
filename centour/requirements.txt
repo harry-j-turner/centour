@@ -2,3 +2,21 @@ Django==4.2.7
 django-tailwind[reload]==3.6.0
 pytest==7.4.3
 pytest-django==4.7.0
+
+# Linting
+flake8
+flake8-annotations
+flake8-bugbear
+dlint
+flake8-simplify
+darglint
+flake8-bandit
+flake8-builtins
+flake8-comprehensions
+flake8-docstrings
+flake8-eradicate
+pep8-naming
+flake8-pytest-style
+
+# Formatting
+black

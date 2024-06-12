@@ -1,0 +1,37 @@
+repos:
+  - repo: local
+    hooks:
+      - id: lint-centour
+        name: Lint Centour
+        entry: python3.12 -m flake8 ./centour
+        language: system
+        files: '\.(py)$'
+        always_run: true
+        pass_filenames: false
+        args: []
+        stages: [commit]
+        additional_dependencies: []
+        description: This hook lints the Centour backend with flake8.
+
+      - id: format-centour
+        name: Format Centour
+        entry: python3.12 -m black --check --line-length 120 .
+        language: system
+        files: '\.(py)$'
+        always_run: true
+        pass_filenames: false
+        args: []
+        stages: [commit]
+        additional_dependencies: []
+        description: This hook formats the Centour backend with black.
+
+      - id: test-centour
+        name: Test Centour
+        entry: python3.12 -m pytest -s ./centour
+        language: system
+        files: '\.(py)$'
+        always_run: true
+        pass_filenames: false
+        stages: [commit]
+        additional_dependencies: []
+        description: This hook runs Django tests.
