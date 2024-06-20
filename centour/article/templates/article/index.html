@@ -1,7 +1,32 @@
-{% extends 'article/base.html' %}
+{% extends 'base.html' %}
 
 {% block content %}
-<div class="container mx-auto p-6 flex justify-center" id="article-detail">
-    <h1 class="text-2xl text-blue-950">Centour</h1>
+<div class="container mx-auto p-6 flex flex-col items-start">
+    <h1 class="text-3xl font-bold text-slate-700">Centour</h1>
+    {% if user.is_authenticated %}
+        <div class="flex ml-auto mt-4 space-x-4">
+            <a href="{% url 'index' %}" class="px-4 py-2 bg-green-600 text-white rounded">Create New Entry</a>
+            <a href="{% url 'logout' %}" class="px-4 py-2 bg-slate-700 text-white rounded">Log Out</a>
+        </div>
+    {% else %}
+        <div class="mt-4">
+            <a href="{% url 'login' %}" class="px-4 py-2 bg-slate-700 text-white rounded">Log In</a>
+        </div>
+    {% endif %}
 </div>
+{% if user.is_authenticated %}
+<div class="container mx-auto p-6">
+    <h2 class="text-2xl font-bold text-slate-700">Discover</h2>
+    <div class="mt-4">
+        {% for article in articles %}
+            <div class="border-b border-slate-300 py-2">
+                <h3 class="text-xl font-bold text-slate-700">{{ article.title }}</h3>
+                <p class="text-slate-500">{{ article.content }}</p>
+            </div>
+        {% empty %}
+            <p class="text-slate-500">No articles found.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
 {% endblock %}
