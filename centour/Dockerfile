@@ -8,6 +8,13 @@ FROM python:3.12-slim-bookworm as builder
 # install system dependencies
 RUN apt-get update \
   && apt-get -y install g++ ca-certificates curl gnupg \
+  && apt-get install -y binutils libproj-dev gdal-bin \
+  && apt-get install -y software-properties-common \
+  && apt-get install -y python3-launchpadlib \
+  && add-apt-repository ppa:ubuntugis/ppa \
+  && apt-get install -y libgeos++-dev \
+  && apt-get install -y proj-bin \
+  && apt-get install -y libgdal-dev \
   && apt-get clean
 
 # install node
@@ -41,16 +48,18 @@ FROM python:3.12-slim-bookworm
 # upgrade system packages
 RUN apt-get update && apt-get upgrade -y && apt-get clean
 
-# create directory for the app user
-RUN mkdir -p /home/app
+# Install GeoDjango dependencies
+RUN apt-get update \
+    && apt-get install -y binutils libproj-dev gdal-bin \
+    && apt-get install -y software-properties-common \
+    && apt-get install -y python3-launchpadlib \
+    && add-apt-repository ppa:ubuntugis/ppa \
+    && apt-get install -y libgeos++-dev \
+    && apt-get install -y proj-bin \
+    && apt-get install -y libgdal-dev
 
-# create the app user
-RUN addgroup --system app && adduser --system --group app
-
-# create the appropriate directories
-ENV HOME=/home/app
-ENV APP_HOME=/home/app/web
-RUN mkdir $APP_HOME
+ENV APP_HOME=/app
+RUN mkdir -p $APP_HOME
 WORKDIR $APP_HOME
 
 # set environment variables
@@ -70,9 +79,5 @@ RUN pip install --no-cache /wheels/*
 # copy project
 COPY . $APP_HOME
 
-# chown all the files to the app user
-RUN chown -R app:app $HOME
-# change to the app user
-USER app
 # serve the application
-CMD gunicorn core.wsgi:application --bind 0.0.0.0:$PORT
+ENTRYPOINT ["/app/entrypoint.sh"]

@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import os
 from pathlib import Path
 
-import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -44,11 +43,15 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.gis",
     "whitenoise.runserver_nostatic",
+    "guardian",
     "tailwind",
     "theme",
     "django_browser_reload",
-    "article",
+    "user",
+    "www",
+    "entry"
 ]
 
 MIDDLEWARE = [
@@ -87,7 +90,16 @@ WSGI_APPLICATION = "core.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {"default": dj_database_url.config(default="sqlite:///db.sqlite3")}
+DATABASES = {
+    "default": {
+        "ENGINE": os.environ.get("DB_ENGINE"),
+        "NAME": os.environ.get("DB_DATABASE"),
+        "USER": os.environ.get("DB_USER"),
+        "PASSWORD": os.environ.get("DB_PASSWORD"),
+        "HOST": os.environ.get("DB_HOST"),
+        "PORT": os.environ.get("DB_PORT"),
+    }
+}
 
 
 # Password validation
@@ -145,10 +157,15 @@ STORAGES = {
 
 # Custom Settings
 
-AUTH_USER_MODEL = "article.CustomUser"
+AUTH_USER_MODEL = "user.CentourUser"
 TAILWIND_APP_NAME = "theme"
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
 LOGIN_REDIRECT_URL = "index"
 LOGOUT_REDIRECT_URL = "index"
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'guardian.backends.ObjectPermissionBackend',
+)

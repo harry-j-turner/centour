@@ -6,8 +6,10 @@ whitenoise==6.6.0
 
 # Database
 dj-database-url==2.1.0
+django-guardian
 psycopg==3.1.13
 psycopg-binary==3.1.13
+geos
 
 # WSGI
 gunicorn==21.0.1

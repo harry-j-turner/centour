@@ -1,21 +1,31 @@
 version: '3.8'
 
 services:
+
   centour_db:
-    image: postgres:16-alpine
+    image: postgis/postgis:12-3.4-alpine
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     environment:
       - POSTGRES_USER=centour_user
       - POSTGRES_PASSWORD=centour_password
       - POSTGRES_DB=centour_db
+
   centour:
     build: .
-    command: gunicorn core.wsgi:application --bind 0.0.0.0:8000
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
     ports:
       - "8000:8000"
     environment:
-      - DATABASE_URL=postgresql://centour_user:centour_password@centour_db:5432/centour_db
+      - DEBUG=1
+      - DB_ENGINE=django.contrib.gis.db.backends.postgis
+      - DB_DATABASE=centour_db
+      - DB_USER=centour_user
+      - DB_PASSWORD=centour_password
+      - DB_HOST=centour_db
+      - DB_PORT=5432
     depends_on:
       - centour_db
 
