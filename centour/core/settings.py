@@ -92,8 +92,11 @@ WSGI_APPLICATION = "core.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+database_config = dj_database_url.config()
+database_config['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
+
 DATABASES = {
-    "default": dj_database_url.config()
+    "default": database_config
 }
 
 
