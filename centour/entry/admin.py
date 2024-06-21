@@ -1,3 +1,11 @@
 from django.contrib import admin
+from guardian.admin import GuardedModelAdmin
 
-# Register your models here.
+from .models import Entry
+
+
+class EntryAdmin(GuardedModelAdmin):
+    list_display = ('uuid', 'title', 'created_at')
+
+
+admin.site.register(Entry, EntryAdmin)
