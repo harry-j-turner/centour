@@ -21,7 +21,7 @@
                     {% if user.is_authenticated %}
                     <span class="text-gray-700 text-lg mb-4">Logged in as {{ user.username }}</span>
                     <hr class="border-t border-slate-300 py-2">
-                    <a class="text-slate-600 text-lg">Profile</a>
+                    <a href="{% url 'profile' %}" class=" text-slate-600 text-lg">Profile</a>
                     <a href="{% url 'discover' %}" class="text-slate-600 text-lg">Discover</a>
                     <a href="{% url 'logout' %}" class="text-slate-600 text-lg">Logout</a>
                     {% endif %}

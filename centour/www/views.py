@@ -1,6 +1,8 @@
 from django.contrib.auth import views as auth_views
+from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import View
+from django.urls import reverse_lazy
 
 from entry.models import Entry
 from entry.forms import EntryForm
@@ -23,6 +25,22 @@ class LoginView(auth_views.LoginView):
 
         return super().get(request)
 
+
+class ChangePasswordFormView(auth_views.PasswordChangeView):
+    template_name = "registration/change_password_form.html"
+    success_url = reverse_lazy("password_change_done")
+
+
+class ChangePasswordDoneView(auth_views.PasswordChangeDoneView):
+    template_name = "registration/change_password_done.html"
+
+
+class ProfileView(View):
+    def get(self, request):
+        if not request.user.is_authenticated:
+            return redirect("index")
+
+        return render(request, "www/profile.html")
 
 class DiscoverView(View):
     def get(self, request):
