@@ -20,12 +20,12 @@ services:
       - "8000:8000"
     environment:
       - DEBUG=1
-      - DB_ENGINE=django.contrib.gis.db.backends.postgis
-      - DB_DATABASE=centour_db
-      - DB_USER=centour_user
-      - DB_PASSWORD=centour_password
-      - DB_HOST=centour_db
-      - DB_PORT=5432
+      - DATABASE_ENGINE=django.contrib.gis.db.backends.postgis
+      - DATABASE_DATABASE=centour_db
+      - DATABASE_USER=centour_user
+      - DATABASE_PASSWORD=centour_password
+      - DATABASE_URL=centour_db
+      - DATABASE_PORT=5432
     depends_on:
       - centour_db
 
