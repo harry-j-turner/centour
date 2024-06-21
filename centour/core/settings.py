@@ -162,8 +162,9 @@ TAILWIND_APP_NAME = "theme"
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
-LOGIN_REDIRECT_URL = "index"
+LOGIN_REDIRECT_URL = "discover"
 LOGOUT_REDIRECT_URL = "index"
+LOGIN_URL = "login"
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',

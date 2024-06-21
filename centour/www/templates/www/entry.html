@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ entry.title }}{% endblock %}
+
+{% block content %}
+<div class="mb-4">
+    <a href="{% url 'discover' %}" class="text-xl font-semibold text-blue-600">Back</a>
+    <p class="mt-4">{{ entry.content }}</p>
+    <p class="text-sm text-gray-500 mt-4">Created at: {{ entry.created_at }}</p>
+</div>
+{% endblock %}

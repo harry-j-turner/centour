@@ -3,12 +3,12 @@ from django.urls import reverse
 
 
 @pytest.mark.django_db
-def test_index_shows_login(client):
-    """Index shows login button for unauthenticated users."""
+def test_index_redirects_to_login(client):
+    """Index redirects to login for unauthenticated users."""
 
     response = client.get(reverse("index"))
-    assert response.status_code == 200
-    assert b"Login" in response.content
+    assert response.status_code == 302
+    assert response.url == reverse("login")
 
 
 @pytest.mark.django_db
@@ -19,3 +19,4 @@ def test_index_redirects_to_discover(client, user):
     response = client.get(reverse("index"))
     assert response.status_code == 302
     assert response.url == reverse("discover")
+
