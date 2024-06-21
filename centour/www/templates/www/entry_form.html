@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{% if uuid %}Edit Entry{% else %}Create Entry{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="w-full border-gray-300">
+    <form method="POST" class="w-full">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="mt-4">
+            <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                {% if uuid %}Update{% else %}Create{% endif %}
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}

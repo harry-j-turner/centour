@@ -3,9 +3,12 @@
 {% block title %}{{ entry.title }}{% endblock %}
 
 {% block content %}
-<div class="mb-4">
-    <a href="{% url 'discover' %}" class="text-xl font-semibold text-blue-600">Back</a>
-    <p class="mt-4">{{ entry.content }}</p>
+<div class="mb-4 flex justify-start items-center">
+    <a href="{% url 'discover' %}" class="text-xl font-semibold text-blue-600 underline">Back</a>
+    <a href="{% url 'entry_form' entry.uuid %}" class=" text-xl text-slate-700 pl-4 font-bold underline">Edit</a>
+</div>
+<div class="mt-4">
+    <p>{{ entry.content }}</p>
     <p class="text-sm text-gray-500 mt-4">Created at: {{ entry.created_at }}</p>
 </div>
 {% endblock %}

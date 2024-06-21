@@ -5,11 +5,12 @@
 {% block content %}
 <div class="w-full">
     <div class="flex justify-end">
-        <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+        <a href="{% url 'entry_form' %}" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
             Create new entry
-        </button>
+        </a>
     </div>
 </div>
+
 <div class="mt-4">
     {% for entry in entries %}
     <div class="p-4 mb-4 border rounded shadow">
