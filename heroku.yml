@@ -7,3 +7,4 @@ build:
     web: centour/Dockerfile
 run:
   web: gunicorn core.wsgi:application --bind 0.0.0.0:$PORT
+
