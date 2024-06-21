@@ -1,6 +1,7 @@
 setup:
   addons:
-    - plan: heroku-postgresql
+    - plan: heroku-postgresql:standard-0 
+    - plan: heroku-postgis
 build:
   docker:
     web: centour/Dockerfile
